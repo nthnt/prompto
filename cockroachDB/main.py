@@ -1,8 +1,24 @@
 from fastapi import FastAPI
 from promptoDB import *
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Cat(BaseModel):
     category: str
@@ -26,14 +42,14 @@ async def db():
     
     return {"message": "Success"}
 
-@app.post("/setValue/")
+@app.post("/setValue/{cat.category}")
 async def setValue(cat: Cat):
     table = Table()
     table.setValue(cat.category, ["ID", "phrase"], cat.id, [cat.phrase])
 
     return {"message": "Success"}
 
-@app.get("/getValue")
+@app.get("/getValue/{cat.category}")
 async def getValue(cat: Cat):
     table = Table()
     table.getValue(cat.category)
