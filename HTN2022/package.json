@@ -1,0 +1,16 @@
+{
+  "name": "prompto",
+  "version": "1.0.0",
+  "description": "cohere idea generating web app",
+  "main": "index.js",
+  "dependencies": {
+    "cohere": "^1.1.1",
+    "cohere-ai": "^4.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
