@@ -38,7 +38,7 @@ async def root():
 @app.get("/db")
 async def db():
     table = Table()
-    table.createTable("hate", "phrase", "STRING NOT NULL")
+    table.createTable("food", "phrase", "STRING NOT NULL")
     
     return {"message": "Success"}
 
@@ -46,6 +46,11 @@ async def db():
 async def setValue(cat: Cat):
     table = Table()
     table.setValue(cat.category, ["ID", "phrase"], cat.id, [cat.phrase])
+
+@app.get("/setValue")
+async def setValue():
+    table = Table()
+    table.setValue("art", ["ID", "phrase"], 2, ["Transparent entrance to a small world of personal design and creativity"])
 
     return {"message": "Success"}
 
